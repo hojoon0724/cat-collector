@@ -25,4 +25,6 @@ urlpatterns = [
     # Associate toy with a cat (M:M)
     path("cats/<int:cat_id>/assoc_toy/<int:toy_id>/", views.assoc_toy, name="assoc_toy"),
     path("cats/<int:cat_id>/remove_toy/<int:toy_id>/", views.remove_toy, name="remove_toy"),
+    # Signup a user
+    path("accounts/signup/", views.signup, name="signup"),
 ]

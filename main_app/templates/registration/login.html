@@ -1,0 +1,17 @@
+{%extends 'base.html'%} {%block content%}
+<h1>Signup</h1>
+{% if error_message %}
+<p class="red-text">{{error_message}}</p>
+{%endif%}
+
+<!-- TODO add signup action -->
+<form action="{% url 'login' %}" method="post">
+  {% csrf_token%} {{form.as_p}}
+  <input type="submit" value="login" class="btn" />
+  <!-- Django featuer that will automatically redirect a user that tries to access a protected route, back to that route after they login -->
+  <input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+<!-- Reference: https://docs.djangoproject.com/en/2.2/topics/auth/customizing/#extending-the-existing-user-model  -->
+
+{%endblock%}

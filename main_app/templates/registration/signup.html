@@ -1,0 +1,15 @@
+{%extends 'base.html'%} {%block content%}
+<h1>Signup</h1>
+{% if error_message %}
+<p class="red-text">{{error_message}}</p>
+{%endif%}
+
+<!-- TODO add signup action -->
+<form action="{% url 'signup'%}" method="post">
+  {% csrf_token%} {{form.as_p}}
+  <input type="submit" value="signup" class="btn" />
+</form>
+
+<!-- Reference: https://docs.djangoproject.com/en/2.2/topics/auth/customizing/#extending-the-existing-user-model  -->
+
+{%endblock%}

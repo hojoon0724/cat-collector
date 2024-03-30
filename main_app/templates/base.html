@@ -2,42 +2,52 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cat Collector</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <header class="navbar-fixed">
-        <nav>
-            <div class="nav-wrapper">
-                <ul>
-                    <li><a href="/" class="left brand-logo">&nbsp;&nbsp;CatCollector</a></li>
-                </ul>
-                <ul class="right">
-                    <li><a href="{% url 'about' %}">About</a></li>
-                    <!-- Add/View a Toys -->
-                    <li><a href="{% url 'toys_create' %}">Add a Toy</a></li>
-                    <li><a href="{% url 'toys_index' %}">View All Toy</a></li>
-                    <!-- Create a Cat -->
-                    <li><a href="{% url 'create_cat' %}">Add a Cat</a></li>
-                    <!-- Link to all of our cats -->
-                    <li><a href="{% url 'index' %}">View All My Cats</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <main class="container">
-        {% block content %}
-        {% endblock %}
-    </main>
-    <footer class="page-footer">
-        <div class="footer-copyright">
-                All Rights Reserved, &copy; 2024 Cat Collector
+      <nav>
+        <div class="nav-wrapper">
+          <ul>
+            <li><a href="/" class="left brand-logo">&nbsp;&nbsp;CatCollector</a></li>
+          </ul>
+          <ul class="right">
+            <li><a href="{% url 'about' %}">About</a></li>
+            {% if user.is_authenticated %}
+            <!-- Add/View a Toys -->
+            <li><a href="{% url 'toys_create' %}">Add a Toy</a></li>
+            <li><a href="{% url 'toys_index' %}">View All Toy</a></li>
+            <!-- Create a Cat -->
+            <li><a href="{% url 'create_cat' %}">Add a Cat</a></li>
+            <!-- Link to all of our cats -->
+            <li><a href="{% url 'index' %}">View All My Cats</a></li>
+            <!-- logout functionality -->
+            <li>
+              <!-- TODO add Logout action -->
+              <form action="{% url 'logout'%}" method="post">
+                {% csrf_token %}
+                <input type="submit" class="btn blue" value="logout" />
+              </form>
+            </li>
+
+            {% else %}
+            <!-- TODO add urls -->
+            <li><a class="green" href="{% url 'signup'%}">Sign Up</a></li>
+            <li><a class="teal" href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+          </ul>
         </div>
+      </nav>
+    </header>
+    <main class="container">{% block content %} {% endblock %}</main>
+    <footer class="page-footer">
+      <div class="footer-copyright">All Rights Reserved, &copy; 2024 Cat Collector</div>
     </footer>
-</body>
+  </body>
 </html>

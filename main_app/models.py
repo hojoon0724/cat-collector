@@ -6,6 +6,10 @@ from django.urls import reverse
 # import date
 from datetime import date
 
+
+# import the user model
+from django.contrib.auth.models import User
+
 MEALS = (
     ("B", "Breakfast"),
     ("L", "Lunch"),
@@ -30,6 +34,8 @@ class Cat(models.Model):
     breed = models.CharField(max_length=100)
     description = models.CharField(max_length=250)
     age = models.IntegerField()
+    # add the M:M relationship
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     # Add the M:M relationship
     toys = models.ManyToManyField(Toy)
